@@ -43,7 +43,7 @@ def process_image(model, device, file_path):
     orig_size = torch.tensor([[w, h]]).to(device)
 
     transforms = T.Compose([
-        T.Resize((640, 640)),
+        T.Resize((1280, 1280)),
         T.ToTensor(),
     ])
     im_data = transforms(im_pil).unsqueeze(0).to(device)
@@ -124,6 +124,8 @@ def main(args):
         raise AttributeError('Only support resume to load model.state_dict by now.')
 
     # Load train mode state and convert to deploy mode
+    # del state["decoder.anchors"]
+    # del state["decoder.valid_mask"]
     cfg.model.load_state_dict(state)
 
     class Model(nn.Module):
