@@ -43,7 +43,7 @@ def process_image(model, device, file_path):
     orig_size = torch.tensor([[w, h]]).to(device)
 
     transforms = T.Compose([
-        T.Resize((1280, 1280)),
+        T.Resize((640, 640)),
         T.ToTensor(),
     ])
     im_data = transforms(im_pil).unsqueeze(0).to(device)
